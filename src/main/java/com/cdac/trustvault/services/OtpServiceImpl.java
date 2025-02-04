@@ -37,7 +37,7 @@ public class OtpServiceImpl implements OtpService {
 		otp.setEmail(otpDto.getEmail());
 		otp.setOtp(otpDto.getOtp());
 		otp.setGenerationTime(LocalDateTime.now());
-		otp.setExpirationTime(otp.getGenerationTime().plusMinutes(1));
+		otp.setExpirationTime(otp.getGenerationTime().plusMinutes(3));
 		Otp otp2 = otpRepository.save(otp);
 		return "otp sending done !!";
 	}

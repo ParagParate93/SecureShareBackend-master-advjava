@@ -145,7 +145,7 @@ public class DocumentController {
     	 DocumentSharing documentSharing = new DocumentSharing();
 	        documentSharing.setDocumentId(15L); // Set the document ID directly
 	        documentSharing.setSharedBy("Ashwini Patil"); // Who is sharing it
-	        documentSharing.setSharedWith("patilpramod95@gmail.com"); // Who it is being shared with
+	        documentSharing.setSharedWith("paragparate279@gmail.com"); // Who it is being shared with
 	        String dateTimeString = "2024-12-08T17:49:30.123"; 
 	        LocalDateTime sharedAt = LocalDateTime.parse(dateTimeString); 
 	       

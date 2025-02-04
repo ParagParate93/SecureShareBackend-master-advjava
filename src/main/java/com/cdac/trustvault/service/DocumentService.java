@@ -90,8 +90,12 @@ public class DocumentService {
 	    public boolean shareDocument(DocumentSharing request,LocalDateTime sharedAt) {
 	    	   String loginLink = "http://localhost:5173/login";  
 	    	    String subject = "Document Shared with You: " + request.getDocumentName() + " by "+request.getSharedBy();  // Subject with document name and shared by info
-	    	    String body = String.format("Hello,\n\n%s has shared the document \"%s\" with you on TrustVault.\n\nPlease log in to your TrustVault account to view the document.\n\nLogin here: %s", 
-                        request.getSharedBy(), request.getDocumentName(), loginLink);
+	    	    String body = String.format(
+	    	    	    "Hello,<br><br><span style='margin-left:40px;'>%s has shared the document \"%s\" with you on TrustVault.</span> " +
+	    	    	    "Please register or log in to your TrustVault account to view the document.<br>" +
+	    	    	    "<span style='margin-left:40px;'>Login here: <a href='%s'>%s</a></span>",
+	    	    	    request.getSharedBy(), request.getDocumentName(), loginLink, loginLink
+	    	    	);
 	    	    //  http://localhost:8080/documents/download/15
 	    	    boolean emailSent = emailService.sendEmail(request.getSharedWith(), subject, body);
 

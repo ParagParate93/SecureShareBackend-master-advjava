@@ -55,7 +55,7 @@ public class OTPEmailServiceImpl implements OTPEmailService {
 		mimeMessage.setFrom(sender);
 		mimeMessageHelper.setTo(email);
 		mimeMessageHelper.setSubject("trustVault 2FA");
-		mimeMessageHelper.setText("Your 2FA otp for TrustVault is : " + otp + " valid until  3 mins only !!! ");
+		mimeMessageHelper.setText("Your 2FA otp for TrustVault is : " + otp + " valid for 3 mins only !!! ");
 		javaMailSender.send(mimeMessage);
 	}
 	

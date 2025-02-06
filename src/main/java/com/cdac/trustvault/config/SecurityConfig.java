@@ -26,7 +26,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable()) // Disable CSRF protection
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/users/signin","/otp/verifyotp","/sendOtp/{email}","/create").permitAll() // Allow unauthenticated access to login endpoint
+                .requestMatchers("/users/signin","/otp/verifyotp","/sendOtp/{email}","/create","/users/reset-password","/forgotpass/**","/api/contactus/**").permitAll() // Allow unauthenticated access to login endpoint
                 .anyRequest().authenticated() // Require authentication for all other requests
             )
             .sessionManagement(session -> session

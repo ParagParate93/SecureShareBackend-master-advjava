@@ -56,16 +56,20 @@ public class OtpServiceImpl implements OtpService {
 		return mapper.map(otp, OtpResDto.class);
 	}
 
+
+	
 	@Override
 	public boolean verifyResetOtp(PasswordResetRequest passwordResetRequest) {
-		Optional<Otp> optional = otpRepository.findByEmailAndOtp(passwordResetRequest.getEmail(),passwordResetRequest.getOtp());
-		System.out.println(optional);
-		UserEntity optional2 = userRepository.findByEmail(passwordResetRequest.getEmail())
-				.orElseThrow(() -> new ResourceNotFoundException("invalid email or otp !!"));	
-		if(optional2.getEmail() != null) {
-			return true;
-		}
-		return false;
-		
+	    Optional<Otp> optional = otpRepository.findByEmailAndOtp(passwordResetRequest.getEmail(), passwordResetRequest.getOtp());
+
+	    if (!optional.isPresent()) {
+	        return false; 
+	    }
+
+	    UserEntity optional2 = userRepository.findByEmail(passwordResetRequest.getEmail())
+	            .orElseThrow(() -> new ResourceNotFoundException("Invalid email or otp!!"));
+
+	    return optional2.getEmail() != null;
 	}
+
 }

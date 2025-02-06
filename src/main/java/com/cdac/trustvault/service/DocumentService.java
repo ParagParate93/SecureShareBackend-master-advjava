@@ -29,6 +29,10 @@ public class DocumentService {
 
 	    @Autowired
 	    private EmailService emailService;
+	    
+	    public List<Document> getAllDocuments() {
+	        return documentRepository.findAll();
+	    }
 
 	    public Document uploadDocument(MultipartFile file,String uploadedBy,String uploaderEmail) throws Exception {
 	        SecretKey key = FileEncryptionUtil.generateKey();
@@ -91,9 +95,9 @@ public class DocumentService {
 	    	   String loginLink = "http://localhost:5173/login";  
 	    	    String subject = "Document Shared with You: " + request.getDocumentName() + " by "+request.getSharedBy();  // Subject with document name and shared by info
 	    	    String body = String.format(
-	    	    	    "Hello,<br><br><span style='margin-left:40px;'>%s has shared the document \"%s\" with you on TrustVault.</span> " +
+	    	    	    "Hello,<br><span style='margin-left:40px;'><b>%s</b> has shared the document \"<b>%s</b>\" with you on TrustVault.</span> " +
 	    	    	    "Please register or log in to your TrustVault account to view the document.<br>" +
-	    	    	    "<span style='margin-left:40px;'>Login here: <a href='%s'>%s</a></span>",
+	    	    	    "<span style='margin-left:40px;'><b>Login here:</b> <a href='%s'>%s</a></span>",
 	    	    	    request.getSharedBy(), request.getDocumentName(), loginLink, loginLink
 	    	    	);
 	    	    //  http://localhost:8080/documents/download/15

@@ -23,7 +23,8 @@ public class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@CreationTimestamp
+	@UpdateTimestamp
+	//@CreationTimestamp
 	@Column(name="created_on")
 	private LocalDate createdOn;
 	@UpdateTimestamp

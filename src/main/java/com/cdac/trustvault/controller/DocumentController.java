@@ -24,8 +24,8 @@ import com.cdac.trustvault.util.FileEncryptionUtil;
 
 
 @RestController
-@RequestMapping("api/document")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api/document")
 public class DocumentController {
 
     @Autowired
@@ -38,9 +38,14 @@ public class DocumentController {
     DocumentRepository documentRepository;
 
     
-    @Autowired
+    @Autowired	
     DocumentSharingRepository documentSharingRepository;
-
+    
+    @GetMapping
+    public List<Document> getAllDocuments() {
+        return documentService.getAllDocuments();
+    }
+    
     @PostMapping("/upload")
     public ResponseEntity<?> uploadDocument(@RequestParam("file") MultipartFile file, 
                                             @RequestParam("uploadedBy") String uploadedBy,@RequestParam("uploaderEmail") String uploaderEmail) {

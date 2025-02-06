@@ -22,5 +22,9 @@ public class UserRespDTO extends BaseDTO {
 		this.email = email;
 	}
 	
+	UserRespDTO(String Jwt) {
+		
+	}
+	
 	
 }

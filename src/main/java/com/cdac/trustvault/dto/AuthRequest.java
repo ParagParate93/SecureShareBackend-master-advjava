@@ -19,3 +19,4 @@ public class AuthRequest {
 	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message = "Invalid password format!!!!")
 	private String password;
 }
+ 

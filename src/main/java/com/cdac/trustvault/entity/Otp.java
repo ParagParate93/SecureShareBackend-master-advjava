@@ -46,10 +46,86 @@ public class Otp {
 	
 	private String role;
 
+	
+	public Otp() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public Otp(String otp, String email) {
 		this.otp = otp;
 		this.email = email;
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public LocalDateTime getGenerationTime() {
+		return generationTime;
+	}
+
+
+	public void setGenerationTime(LocalDateTime generationTime) {
+		this.generationTime = generationTime;
+	}
+
+
+	public LocalDateTime getExpirationTime() {
+		return expirationTime;
+	}
+
+
+	public void setExpirationTime(LocalDateTime expirationTime) {
+		this.expirationTime = expirationTime;
+	}
+
+
+	public String getOtp() {
+		return otp;
+	}
+
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Otp [id=" + id + ", generationTime=" + generationTime + ", expirationTime=" + expirationTime + ", otp="
+				+ otp + ", email=" + email + ", role=" + role + "]";
+	}
+	
+	
 }
 	
 	

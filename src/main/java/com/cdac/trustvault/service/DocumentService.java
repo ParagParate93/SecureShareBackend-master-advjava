@@ -59,20 +59,38 @@ public class DocumentService {
 	    }
 
 	    public List<Document> getDocumentsByUploader(String uploadedBy, String uploaderEmail) {
-	    	List<Document> uploadedDocuments = documentRepository.findByUploadedByAndUploaderEmail(uploadedBy, uploaderEmail);
+	        // Fetch uploaded documents by the uploader
+	        List<Document> uploadedDocuments = documentRepository.findByUploadedByAndUploaderEmail(uploadedBy, uploaderEmail);
+	        
+	        // Fetch shared documents info for the uploader
 	        List<DocumentSharing> sharedDocumentsInfo = documentSharingRepository.findBySharedWith(uploaderEmail);
 	        List<Long> sharedDocumentIds = sharedDocumentsInfo.stream()
 	                .map(DocumentSharing::getDocumentId)
 	                .collect(Collectors.toList());
 	        
-	        
+	        // Fetch shared documents using the shared document IDs
 	        List<Document> sharedDocuments = documentRepository.findAllById(sharedDocumentIds);
 	        
+	        // Attach sharing details to the document
 	        for (Document document : sharedDocuments) {
-	            document.setShared(true); 
+	            DocumentSharing sharingInfo = sharedDocumentsInfo.stream()
+	                .filter(docSharing -> docSharing.getDocumentId().equals(document.getId()))
+	                .findFirst()
+	                .orElse(null);
+	            
+	            if (sharingInfo != null) {
+	                document.setShared(true);  // Mark the document as shared
+	                // Optionally, you can attach the sharing information to the document or create a new field.
+	                document.setSharedBy(sharingInfo.getSharedBy());
+	                document.setSharedWith(sharingInfo.getSharedWith());
+	                document.setSharedAt(sharingInfo.getSharedAt());
+	            }
 	        }
+	        
+	        // Combine uploaded and shared documents
 	        uploadedDocuments.addAll(sharedDocuments);
 	        
+	        // Return documents directly (no DTO needed)
 	        return uploadedDocuments;
 	    }
 	    

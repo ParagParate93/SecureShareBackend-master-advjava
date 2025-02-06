@@ -47,10 +47,11 @@ public class OtpServiceImpl implements OtpService {
 		Optional<Otp> optional = otpRepository.findByEmailAndOtp(dto.getEmail(), dto.getOtp());
 		UserEntity optional2 = userRepository.findByEmail(dto.getEmail())
 				.orElseThrow(() -> new ResourceNotFoundException("invalid email"));
-		System.out.println(optional2.getRole());
+		
 		Otp otp = optional.orElseThrow(() -> new ResourceNotFoundException("invalid email or otp !"));
 		otp.setRole(optional2.getRole().toString());
 		if (otp.getExpirationTime().isBefore(LocalDateTime.now())) {
+			otpRepository.delete(otp);
 			throw new ResourceNotFoundException("OTP has expired !!! ");
 		}
 		return mapper.map(otp, OtpResDto.class);
@@ -61,15 +62,18 @@ public class OtpServiceImpl implements OtpService {
 	@Override
 	public boolean verifyResetOtp(PasswordResetRequest passwordResetRequest) {
 	    Optional<Otp> optional = otpRepository.findByEmailAndOtp(passwordResetRequest.getEmail(), passwordResetRequest.getOtp());
-
 	    if (!optional.isPresent()) {
 	        return false; 
+	    }	    
+	    if (optional.get().getExpirationTime().isBefore(LocalDateTime.now())) {
+	    	otpRepository.delete(optional.get());
+	    	return false;
 	    }
-
 	    UserEntity optional2 = userRepository.findByEmail(passwordResetRequest.getEmail())
 	            .orElseThrow(() -> new ResourceNotFoundException("Invalid email or otp!!"));
-
+	    otpRepository.delete(optional.get());
+	    
 	    return optional2.getEmail() != null;
-	}
+	}	
 
 }

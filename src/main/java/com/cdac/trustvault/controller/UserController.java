@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 	  @Autowired
 	    private UserServiceImpl userService;
@@ -36,6 +37,7 @@ public class UserController {
  
 		  @PostMapping(path="/create")
 		    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+			  user.setPassword(userService.hashPassword(user.getPassword()));
 			  UserEntity createdUser = userService.createUser(user);
 		        return ResponseEntity.status(201).body(createdUser);
 		    }

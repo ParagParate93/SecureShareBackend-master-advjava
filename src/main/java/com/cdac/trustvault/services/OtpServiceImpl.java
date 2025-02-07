@@ -51,9 +51,10 @@ public class OtpServiceImpl implements OtpService {
 		Otp otp = optional.orElseThrow(() -> new ResourceNotFoundException("invalid email or otp !"));
 		otp.setRole(optional2.getRole().toString());
 		if (otp.getExpirationTime().isBefore(LocalDateTime.now())) {
-			otpRepository.delete(otp);
 			throw new ResourceNotFoundException("OTP has expired !!! ");
 		}
+		
+		otpRepository.delete(otp);
 		return mapper.map(otp, OtpResDto.class);
 	}
 

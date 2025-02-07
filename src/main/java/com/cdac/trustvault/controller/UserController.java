@@ -20,10 +20,10 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
+	
 	  @Autowired
 	    private UserServiceImpl userService;
 	  
-		
 		 @GetMapping(path="/getalluser") public List<UserEntity> getUsers() { return
 		  userService.getAllUsers(); }
 		 
@@ -55,6 +55,21 @@ public class UserController {
 	        return userService.deleteUser(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
 	    }
 	    
+	 // Get a user by email: GET /users?email=user@example.com
+	    @GetMapping("/by-email")
+	    public ResponseEntity<UserEntity> getUserByEmail(@RequestParam("email") String email) {
+	        UserEntity user = userService.getUserByEmail(email);
+	        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+	    }
+
+	    // Update a user by email: PUT /users?email=user@example.com
+	    @PutMapping("/by-email")
+	    public ResponseEntity<UserEntity> updateUserByEmail(
+	            @RequestParam("email") String email,
+	            @RequestBody UserEntity userData) {
+	        UserEntity updatedUser = userService.updateUserByEmail(email, userData);
+	        return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
+	    }
 
 
 	}    	

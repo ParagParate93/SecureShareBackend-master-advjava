@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
-
+import com.cdac.trustvault.entity.UserRole;
 import jakarta.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "users") // to specify name of the table
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
 @ToString(callSuper = true, exclude = { "password" })
@@ -118,6 +118,10 @@ public class UserEntity extends BaseEntity {
 	}
 	
 	
-	
+    @Column(length = 500)
+    private String bio;
+    
+    @Column(columnDefinition = "LONGTEXT")
+    private String profilePicture;
 
 }

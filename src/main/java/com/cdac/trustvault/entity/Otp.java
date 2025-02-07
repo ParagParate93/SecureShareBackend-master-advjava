@@ -22,7 +22,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "otp")
-@NoArgsConstructor
+//@NoArgsConstructor
 @Getter
 @Setter
 @ToString

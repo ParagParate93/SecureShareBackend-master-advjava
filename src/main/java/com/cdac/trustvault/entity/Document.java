@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 	@Entity
 	@Table(name = "documents")
 	@Data 
-	@NoArgsConstructor 
-	@AllArgsConstructor
+//	@NoArgsConstructor 
+//	@AllArgsConstructor
 public class Document {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

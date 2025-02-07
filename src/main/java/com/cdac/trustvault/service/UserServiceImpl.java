@@ -69,5 +69,26 @@ public class UserServiceImpl implements UserService{
 		public UserEntity getUserByEmail(String email) {
 			return userRepository.findByEmail(email).orElse(null);
 		}
-
+		
+		public UserEntity updateUserByEmail(String email, UserEntity userData) {
+	        UserEntity existingUser = getUserByEmail(email);
+	        if (existingUser != null) {
+	            // Update fields – you can choose to update only allowed fields
+	            existingUser.setName(userData.getName());
+	            existingUser.setPhone(userData.getPhone());
+	            existingUser.setBio(userData.getBio());
+	            existingUser.setProfilePicture(userData.getProfilePicture());
+	            // Only update password if it is provided and not blank
+	            if (userData.getPassword() != null && !userData.getPassword().isEmpty()) {
+	                existingUser.setPassword(hashPassword(userData.getPassword()));
+	            }
+	            // Optionally update role if your business logic allows it.
+	            if (userData.getRole() != null) {
+	                existingUser.setRole(userData.getRole());
+	            }
+	            return userRepository.save(existingUser);
+	        }
+	        return null;
+	    }
+		
 	}

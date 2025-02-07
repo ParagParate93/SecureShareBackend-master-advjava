@@ -4,10 +4,10 @@ import java.lang.System.Logger;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-
+import org.springframework.mail.SimpleMailMessage;
 
 
 @Service
@@ -37,4 +37,15 @@ public class EmailService {
             return false;
         }
     }
+    
+    public void sendContactUsNotification(List<String> adminEmails, String userMessage) {
+        for (String email : adminEmails) {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("New Contact Us Query");
+            message.setText("A new contact us query has been received: \n\n" + userMessage);
+            mailSender.send(message);
+        }
+    }
+    
 }

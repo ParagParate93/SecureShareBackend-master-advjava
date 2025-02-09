@@ -30,4 +30,38 @@ public class BaseEntity {
 	@UpdateTimestamp
 	@Column(name="updated_on")
 	private LocalDateTime updatedOn;
+	public BaseEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public BaseEntity(Long id, LocalDate createdOn, LocalDateTime updatedOn) {
+		super();
+		this.id = id;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public LocalDate getCreatedOn() {
+		return createdOn;
+	}
+	public void setCreatedOn(LocalDate createdOn) {
+		this.createdOn = createdOn;
+	}
+	public LocalDateTime getUpdatedOn() {
+		return updatedOn;
+	}
+	public void setUpdatedOn(LocalDateTime updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+	@Override
+	public String toString() {
+		return "BaseEntity [id=" + id + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
+	}
+	
+	
 }

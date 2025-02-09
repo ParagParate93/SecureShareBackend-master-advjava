@@ -16,6 +16,11 @@ public class UserRespDTO extends BaseDTO {
 	private UserRole role;
 	
 	
+	public UserRespDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public UserRespDTO(String name, String email) {
 		super();
 		this.name = name;
@@ -24,6 +29,30 @@ public class UserRespDTO extends BaseDTO {
 	
 	UserRespDTO(String Jwt) {
 		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 	
 	

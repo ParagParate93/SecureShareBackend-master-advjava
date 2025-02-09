@@ -1,6 +1,7 @@
 package com.cdac.trustvault.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class OtpController {
 	@Autowired
 	private UserServiceImpl userService;
 
-	@PostMapping("/verifyotp")
+	@PostMapping(value = "/verifyotp", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> verifyOtp(@RequestBody OtpDto reqDto) {
 		try {
 			OtpResDto respDto = otpService.verifyOtp(reqDto);

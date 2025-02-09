@@ -43,7 +43,11 @@ public class UserEntity extends BaseEntity {
 	@Column(length = 30) 
 	private UserRole role;
 
-
+	@Column(length = 500)
+    private String bio;
+    
+    @Column(columnDefinition = "LONGTEXT")
+    private String profilePicture;
 	public UserEntity() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -111,6 +115,26 @@ public class UserEntity extends BaseEntity {
 	}
 
 
+	public String getBio() {
+		return bio;
+	}
+
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+ 
+   
 	@Override
 	public String toString() {
 		return "UserEntity [name=" + name + ", email=" + email + ", password=" + password + ", phone=" + phone
@@ -118,10 +142,6 @@ public class UserEntity extends BaseEntity {
 	}
 	
 	
-    @Column(length = 500)
-    private String bio;
     
-    @Column(columnDefinition = "LONGTEXT")
-    private String profilePicture;
 
 }

@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+//@Getter
+//@Setter
+//@ToString
 public class OtpDto {
     @NotBlank(message="Email is required")
 	private String email;
@@ -39,7 +39,7 @@ public class OtpDto {
 		return "OtpDto [email=" + email + ", otp=" + otp + "]";
 	}
 
-    // Getters and Setters
+    
     
     
     
